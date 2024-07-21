@@ -1,15 +1,10 @@
 <script lang="ts">
-	import type { Artwork } from '../types/artwork';
 	import * as Pagination from '$lib/components/ui/pagination';
 
-	export let data: {
-		artworks: Artwork[];
-	};
-
-	let artworks: Artwork[] = data.artworks;
+	export let data;
 </script>
 
-{#if artworks.length === 0}
+{#if data.artworks.length === 0}
 	<p>No artworks found</p>
 {:else}
 	<div
@@ -28,7 +23,7 @@
 			</p>
 			<div class="mt-4 h-[1px] w-full bg-gray-300 lg:mt-8"></div>
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-				{#each artworks as artwork}
+				{#each data.artworks as artwork}
 					<div class="grid-item flex flex-col items-start justify-center pl-4 pr-4 pt-4">
 						<img src={artwork.full_image_url} alt={artwork.title} class="rounded-sm object-cover" />
 						<h3 class="mt-4 text-base font-medium text-gray-700">{artwork.title}</h3>
@@ -40,7 +35,7 @@
 				{/each}
 			</div>
 		</div>
-		<Pagination.Root count={10} perPage={12} let:pages let:currentPage>
+		<Pagination.Root count={120} perPage={12} let:pages let:currentPage>
 			<Pagination.Content>
 				<Pagination.Item>
 					<Pagination.PrevButton />
@@ -51,11 +46,13 @@
 							<Pagination.Ellipsis />
 						</Pagination.Item>
 					{:else}
-						<Pagination.Item>
-							<Pagination.Link {page} isActive={currentPage == page.value}>
-								{page.value}
-							</Pagination.Link>
-						</Pagination.Item>
+						<a href="?page={page.value}">
+							<Pagination.Item>
+								<Pagination.Link {page} isActive={currentPage == page.value}>
+									{page.value}
+								</Pagination.Link>
+							</Pagination.Item>
+						</a>
 					{/if}
 				{/each}
 				<Pagination.Item>
