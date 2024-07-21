@@ -3,7 +3,7 @@ import type { Artwork } from '../types/artwork'; // Adjust the import path as ne
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	try {
-		const res = await fetch('/api/artworks?page=1&limit=10');
+		const res = await fetch('/api/artworks?page=1&limit=12');
 		if (!res.ok) {
 			throw new Error('Failed to fetch artworks');
 		}
