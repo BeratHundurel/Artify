@@ -1,6 +1,5 @@
 <script lang="ts">
 	import * as Pagination from '$lib/components/ui/pagination';
-
 	export let data;
 </script>
 
