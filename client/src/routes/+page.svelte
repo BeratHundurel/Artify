@@ -1,6 +1,18 @@
 <script lang="ts">
 	import * as Pagination from '$lib/components/ui/pagination';
+	import { afterUpdate, onMount } from 'svelte';
+	import { gsap } from 'gsap';
 	export let data;
+	afterUpdate(() => {
+		const masonryItems = document.querySelectorAll('.masonry-item');
+		gsap.from(masonryItems, {
+			opacity: 0,
+			y: 50,
+			stagger: 0.1,
+			duration: 1,
+			ease: 'back.inOut'
+		});
+	});
 </script>
 
 {#if data.artworks.length === 0}
@@ -11,25 +23,14 @@
 	>
 		<div class="flex flex-col py-3">
 			<h1
-				class="border-b border-gray-400 pb-3 text-2xl font-semibold uppercase tracking-wide text-gray-800"
+				class="border-b border-red-950 py-4 text-center text-4xl font-semibold uppercase tracking-wider text-red-950"
 			>
-				The Collection
+				The Wall of Art
 			</h1>
-			<p class="pb-8 pt-4 text-lg leading-8 text-gray-500">
-				Explore thousands of artworks in the museum’s collection from our renowned icons to
-				lesser-known works from every corner of the globe as well as our books, writings, reference
-				materials, and other resources.
-			</p>
-			<div class="mt-4 h-[1px] w-full bg-gray-300 lg:mt-8"></div>
-			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+			<div class="masonry">
 				{#each data.artworks as artwork}
-					<div class="grid-item flex flex-col items-start justify-center pl-4 pr-4 pt-4">
+					<div class="masonry-item flex flex-col items-start">
 						<img src={artwork.full_image_url} alt={artwork.title} class="rounded-sm object-cover" />
-						<h3 class="mt-4 text-base font-medium text-gray-700">{artwork.title}</h3>
-						<p class="mt-2 text-sm text-gray-600">
-							{artwork.artist_display}
-						</p>
-						<div class="mt-10 h-[1px] w-full bg-gray-300" />
 					</div>
 				{/each}
 			</div>
@@ -61,9 +62,3 @@
 		</Pagination.Root>
 	</div>
 {/if}
-
-<style>
-	.grid-item:not(:nth-child(4n)):not(:last-child) {
-		border-right: 1px solid #e5e7eb; /* Tailwind's border-gray-200 */
-	}
-</style>

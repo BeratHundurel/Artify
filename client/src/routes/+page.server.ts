@@ -1,16 +1,13 @@
 import type { PageServerLoad } from './$types';
 import type { Artwork } from '../types/artwork'; // Adjust the import path as needed
+import { fetchArtworks } from '$lib/server/artwork';
 
-export const load: PageServerLoad = async ({ url, fetch }) => {
+export const load: PageServerLoad = async ({ url }) => {
 	try {
 		const page = url.searchParams.get('page') || '1';
-		const res = await fetch(`/api/artworks?page=${page}`);
-		if (!res.ok) {
-			throw new Error('Failed to fetch artworks');
-		}
-		const artworks: Artwork[] = await res.json();
+		const artworks: Artwork[] = await fetchArtworks(page);
 		return {
-			artworks
+			artworks,
 		};
 	} catch (error) {
 		console.error('Error loading artworks:', error);

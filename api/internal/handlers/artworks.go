@@ -10,7 +10,7 @@ import (
 
 func GetArtworks(c *gin.Context) {
 	pageStr := c.DefaultQuery("page", "1")
-	limitStr := c.DefaultQuery("limit", "12")
+	limitStr := c.DefaultQuery("limit", "25")
 
 	page, err := strconv.Atoi(pageStr)
 	if err != nil || page < 1 {
