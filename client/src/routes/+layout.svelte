@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { onNavigate } from '$app/navigation';
+	import Header from '$lib/components/ui/Header.svelte';
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
@@ -14,6 +15,7 @@
 	});
 </script>
 
+<Header />
 <main>
 	<slot></slot>
 </main>
