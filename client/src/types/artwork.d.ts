@@ -12,7 +12,6 @@ export interface Artwork {
 	id: number;
 	image_id: string;
 	artwork_type_id: number;
-    full_image_url: string;
 }
 
 export interface Thumbnail {

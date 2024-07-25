@@ -10,8 +10,8 @@
 			<img src="/logo.png" alt="Logo" class="object-fit-cover" />
 			<h1 class="text-xl">Museum</h1>
 		</div>
-		<a href="/" class="w-24 text-lg text-slate-100 first-letter:uppercase"> Events </a>
-		<a href="/" class="w-24 text-lg text-slate-100 first-letter:uppercase"> History </a>
+		<a href="/events" class="w-24 text-lg text-slate-100 first-letter:uppercase"> Events </a>
+		<a href="/history" class="w-24 text-lg text-slate-100 first-letter:uppercase"> History </a>
 	</div>
 	<div class="flex items-center justify-between lg:hidden">
 		<div>

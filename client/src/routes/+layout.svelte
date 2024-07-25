@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onNavigate } from '$app/navigation';
 	import Header from '$lib/components/ui/Header.svelte';
+	import Footer from '$lib/components/ui/Footer.svelte';
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
@@ -19,3 +20,4 @@
 <main>
 	<slot></slot>
 </main>
+<Footer />

@@ -18,8 +18,8 @@ const (
 // Initialize an HTTP client with a timeout
 var client = &http.Client{Timeout: 10 * time.Second}
 
-type ArtworksResponse struct {
-	Data []types.ArtworkResponse `json:"data"`
+type Artworks struct {
+	Data []types.Artwork `json:"data"`
 }
 
 func buildURL(page, limit int) (string, error) {
@@ -59,32 +59,11 @@ func FetchArtworks(page, limit int) ([]types.Artwork, error) {
 		return nil, fmt.Errorf("failed to read response body: %w", err)
 	}
 
-	var artworksResponse ArtworksResponse
-	err = json.Unmarshal(body, &artworksResponse)
+	var artworks Artworks
+	err = json.Unmarshal(body, &artworks)
 	if err != nil {
 		return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 	}
 
-	artworks := make([]types.Artwork, 0, len(artworksResponse.Data))
-	for _, artworkResponse := range artworksResponse.Data {
-		artwork := types.Artwork{
-			ClassificationTitles: artworkResponse.ClassificationTitles,
-			ShortDescription:     artworkResponse.ShortDescription,
-			IsPublicDomain:       artworkResponse.IsPublicDomain,
-			Thumbnail:            artworkResponse.Thumbnail,
-			ArtistDisplay:        artworkResponse.ArtistDisplay,
-			ArtistTitle:          artworkResponse.ArtistTitle,
-			Title:                artworkResponse.Title,
-			ArtistID:             artworkResponse.ArtistID,
-			ArtworkTypeTitle:     artworkResponse.ArtworkTypeTitle,
-			DateDisplay:          artworkResponse.DateDisplay,
-			ID:                   artworkResponse.ID,
-			ImageID:              artworkResponse.ImageID,
-			ArtworkTypeID:        artworkResponse.ArtworkTypeID,
-			FullImageURL:         fmt.Sprintf("https://www.artic.edu/iiif/2/%s/full/843,/0/default.jpg", artworkResponse.ImageID),
-		}
-		artworks = append(artworks, artwork)
-	}
-
-	return artworks, nil
+	return artworks.Data, nil
 }

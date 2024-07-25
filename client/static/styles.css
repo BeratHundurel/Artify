@@ -18,9 +18,29 @@ body * {
 	height: auto;
 }
 
+.home-masonry {
+	columns: 3;
+	column-gap: 4px;
+}
+
+.home-masonry .masonry-item {
+	width: 100%;
+	margin-bottom: 4px;
+	break-inside: avoid;
+}
+
+.home-masonry .masonry-item img {
+	max-width: 100%;
+	height: auto;
+}
+
 @media screen and (max-width: 1200px) {
 	.masonry {
 		columns: 3;
+		width: calc(100% - 40px);
+	}
+
+	.home-masonry {
 		width: calc(100% - 40px);
 	}
 }
@@ -28,12 +48,15 @@ body * {
 @media screen and (max-width: 768px) {
 	.masonry {
 		columns: 2;
+		column-gap: 8px;
 	}
-}
+    
+	.masonry .masonry-item {
+		margin-bottom: 8px;
+	}
 
-@media screen and (max-width: 480px) {
-	.masonry {
-		columns: 1;
+	.home-masonry {
+		columns: 2;
 	}
 }
 

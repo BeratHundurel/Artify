@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Wrapper from '$lib/components/ui/Wrapper.svelte';
 	import { onMount } from 'svelte';
+	import { IMAGES } from '$lib/config/config';
 
 	let paragraph: HTMLParagraphElement;
 	let image: HTMLImageElement;
@@ -8,6 +9,7 @@
 	let vector2: HTMLDivElement;
 	let vector3: HTMLDivElement;
 	let mobileVector: HTMLDivElement;
+
 	onMount(() => {
 		if (paragraph) {
 			const paragraphHeight = paragraph.offsetHeight;
@@ -34,17 +36,17 @@
 	>
 		<img src="/artbanner.png" alt="Banner" class="relative h-full w-full" />
 		<h1
-			class="absolute bottom-[5%] z-20 w-3/4 text-center text-3xl uppercase tracking-wider text-slate-100 lg:w-1/2 lg:text-5xl"
+			class="absolute bottom-[5%] z-20 w-full text-center text-4xl uppercase tracking-wide text-slate-100 lg:w-3/4 lg:text-7xl"
 		>
 			We preserve History To build Future
 		</h1>
 		<div
-			class="absolute bottom-0 z-10 flex h-1/3 w-full items-center justify-center bg-black opacity-70"
+			class="absolute bottom-0 z-10 flex h-2/5 w-full items-center justify-center bg-black opacity-70"
 		></div>
 	</section>
 	<Wrapper tag="section" class="relative grid grid-cols-1 gap-8 lg:grid-cols-3">
 		<div class="flex flex-col gap-6">
-			<h1 class="relative z-10 text-4xl !leading-[1.2] tracking-wider text-slate-100 lg:text-8xl">
+			<h1 class="relative z-10 text-4xl !leading-[1.2] tracking-wide text-slate-100 lg:text-8xl">
 				The World’s Leading Museum
 				<div
 					class="absolute bottom-0 h-[1px] w-full bg-gray-300 lg:bottom-1/4"
@@ -83,5 +85,12 @@
 		<div
 			class="absolute left-[calc(33.33%-24px)] top-16 hidden h-[1px] w-[calc(66%+4rem)] bg-gray-300 lg:block"
 		></div>
+	</Wrapper>
+	<Wrapper tag="Section" class="home-masonry my-6">
+		{#each IMAGES as image}
+			<div class="masonry-item">
+				<img src={image} alt="Art" class="w-full" />
+			</div>
+		{/each}
 	</Wrapper>
 </div>
