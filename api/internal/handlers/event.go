@@ -2,25 +2,13 @@ package handlers
 
 import (
 	"api/internal/services"
-	"net/http"
-	"strconv"
-
+	"api/internal/utils"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func GetEvents(c *gin.Context) {
-	pageStr := c.DefaultQuery("page", "1")
-	limitStr := c.DefaultQuery("limit", "25")
-
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 1 {
-		page = 1
-	}
-
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil || limit < 1 {
-		limit = 10
-	}
+	page, limit := utils.ReturnUrlParameters(c)
 
 	artworks, err := services.FetchEvents(page, limit)
 	if err != nil {
