@@ -20,6 +20,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	}))
 
 	r.GET("api/artworks", handlers.GetArtworks)
+	r.GET("api/events", handlers.GetEvents)
 
 	return r
 }

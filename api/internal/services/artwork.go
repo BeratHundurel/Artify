@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	baseURL = "https://api.artic.edu/api/v1/artworks/search"
-	fields  = "id,title,thumbnail,date_display,artist_display,place_of_origin_description,short_description,artwork_type_title,artwork_type_id,artist_id,artist_title,classification_titles,image_id,is_public_domain"
+	baseURL       = "https://api.artic.edu/api/v1/artworks/search"
+	artworkFields = "id,title,thumbnail,date_display,artist_display,place_of_origin_description,short_description,artwork_type_title,artwork_type_id,artist_id,artist_title,classification_titles,image_id,is_public_domain"
 )
 
 // Initialize an HTTP client with a timeout
@@ -22,8 +22,8 @@ type Artworks struct {
 	Data []types.Artwork `json:"data"`
 }
 
-func buildURL(page, limit int) (string, error) {
-	u, err := url.Parse(baseURL)
+func buildURL(page, limit int, endpoint, fields string) (string, error) {
+	u, err := url.Parse(endpoint)
 	if err != nil {
 		return "", err
 	}
@@ -39,7 +39,7 @@ func buildURL(page, limit int) (string, error) {
 }
 
 func FetchArtworks(page, limit int) ([]types.Artwork, error) {
-	url, err := buildURL(page, limit)
+	url, err := buildURL(page, limit, baseURL, artworkFields)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build URL: %w", err)
 	}
