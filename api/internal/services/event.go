@@ -44,5 +44,13 @@ func FetchEvents(page, limit int) ([]types.Event, error) {
 		return nil, fmt.Errorf("failed to unmarshal response body: %w", err)
 	}
 
-	return events.Data, nil
+	// Filter events to remove those without an image_url
+	var filteredEvents []types.Event
+	for _, event := range events.Data {
+		if event.ImageURL != "" {
+			filteredEvents = append(filteredEvents, event)
+		}
+	}
+
+	return filteredEvents, nil
 }
